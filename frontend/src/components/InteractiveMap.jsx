@@ -17,10 +17,10 @@ export default function InteractiveMap({
   useEffect(() => {
     if (!mapContainerRef.current) return;
 
-    // Use default central coordinates (e.g. London or New York, let's use a nice central location, say San Francisco: 37.7749, -122.4194)
+    // Use default central coordinates (Bangalore, India: 12.9716, 77.5946)
     // If we have issues, center on the first issue
-    const initialLat = issues.length > 0 ? parseFloat(issues[0].latitude) : 37.7749;
-    const initialLng = issues.length > 0 ? parseFloat(issues[0].longitude) : -122.4194;
+    const initialLat = issues.length > 0 ? parseFloat(issues[0].latitude) : 12.9716;
+    const initialLng = issues.length > 0 ? parseFloat(issues[0].longitude) : 77.5946;
 
     const map = L.map(mapContainerRef.current).setView([initialLat, initialLng], 12);
     
@@ -108,8 +108,12 @@ export default function InteractiveMap({
       // Aggregate issues that are close to each other
       const clusters = {};
       issues.forEach(issue => {
-        const latRound = parseFloat(issue.latitude).toFixed(3);
-        const lngRound = parseFloat(issue.longitude).toFixed(3);
+        const lat = parseFloat(issue.latitude);
+        const lng = parseFloat(issue.longitude);
+        if (isNaN(lat) || isNaN(lng)) return;
+
+        const latRound = lat.toFixed(3);
+        const lngRound = lng.toFixed(3);
         const key = `${latRound}_${lngRound}`;
         if (!clusters[key]) {
           clusters[key] = {
