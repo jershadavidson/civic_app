@@ -15,7 +15,7 @@ export default function Login({ onLoginSuccess }) {
     setError('');
     setLoading(true);
 
-    const url = isRegister ? 'http://localhost:5000/api/auth/register' : 'http://localhost:5000/api/auth/login';
+    const url = isRegister ? 'http://localhost:5001/api/auth/register' : 'http://localhost:5001/api/auth/login';
     const payload = isRegister 
       ? { email, password, full_name: fullName, role } 
       : { email, password };

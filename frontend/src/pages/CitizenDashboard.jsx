@@ -29,7 +29,7 @@ export default function CitizenDashboard({ user, token }) {
   const fetchMyIssues = async () => {
     setLoading(true);
     try {
-      const res = await fetch('http://localhost:5000/api/issues?my_issues=true', {
+      const res = await fetch('http://localhost:5001/api/issues?my_issues=true', {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       const data = await res.json();
@@ -112,7 +112,7 @@ export default function CitizenDashboard({ user, token }) {
 
     setSubmitting(true);
     try {
-      const res = await fetch('http://localhost:5000/api/issues', {
+      const res = await fetch('http://localhost:5001/api/issues', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -156,7 +156,7 @@ export default function CitizenDashboard({ user, token }) {
   // Fetch issue details & timeline comments
   const handleViewDetails = async (issueId) => {
     try {
-      const res = await fetch(`http://localhost:5000/api/issues/${issueId}`, {
+      const res = await fetch(`http://localhost:5001/api/issues/${issueId}`, {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       const data = await res.json();
@@ -175,7 +175,7 @@ export default function CitizenDashboard({ user, token }) {
 
     setCommenting(true);
     try {
-      const res = await fetch(`http://localhost:5000/api/issues/${selectedIssue.issue.id}/comments`, {
+      const res = await fetch(`http://localhost:5001/api/issues/${selectedIssue.issue.id}/comments`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

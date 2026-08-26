@@ -41,7 +41,7 @@ export default function AdminDashboard({ user, token, viewDensityTab = false }) 
   const fetchIssues = async () => {
     setLoading(true);
     try {
-      let url = 'http://localhost:5000/api/issues?';
+      let url = 'http://localhost:5001/api/issues?';
       if (statusFilter) url += `status=${statusFilter}&`;
       if (categoryFilter) url += `category=${categoryFilter}&`;
       if (priorityFilter) url += `priority=${priorityFilter}&`;
@@ -63,7 +63,7 @@ export default function AdminDashboard({ user, token, viewDensityTab = false }) 
 
   const fetchStats = async () => {
     try {
-      const res = await fetch('http://localhost:5000/api/issues/stats', {
+      const res = await fetch('http://localhost:5001/api/issues/stats', {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       const data = await res.json();
@@ -76,7 +76,7 @@ export default function AdminDashboard({ user, token, viewDensityTab = false }) 
 
   const loadIssueDetail = async (issueId) => {
     try {
-      const res = await fetch(`http://localhost:5000/api/issues/${issueId}`, {
+      const res = await fetch(`http://localhost:5001/api/issues/${issueId}`, {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       const data = await res.json();
@@ -98,7 +98,7 @@ export default function AdminDashboard({ user, token, viewDensityTab = false }) 
 
     setUpdating(true);
     try {
-      const res = await fetch(`http://localhost:5000/api/issues/${selectedIssueDetail.issue.id}`, {
+      const res = await fetch(`http://localhost:5001/api/issues/${selectedIssueDetail.issue.id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
